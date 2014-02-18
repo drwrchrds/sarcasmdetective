@@ -1,13 +1,12 @@
 # == Schema Information
 #
-# Table name: statuses
+# Table name: users
 #
-#  id                :integer          not null, primary key
-#  body              :string(140)      not null
-#  twitter_status_id :string(255)      not null
-#  twitter_user_id   :string(255)      not null
-#  created_at        :datetime
-#  updated_at        :datetime
+#  id              :integer          not null, primary key
+#  twitter_handle  :string(255)
+#  twitter_user_id :string(255)
+#  created_at      :datetime
+#  updated_at      :datetime
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html

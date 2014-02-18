@@ -1,8 +1,25 @@
+# == Schema Information
+#
+# Table name: statuses
+#
+#  id                :integer          not null, primary key
+#  body              :string(140)      not null
+#  twitter_status_id :string(255)      not null
+#  twitter_user_id   :string(255)      not null
+#  created_at        :datetime
+#  updated_at        :datetime
+#
+
 require 'open-uri'
 
 class Status < ActiveRecord::Base
   validates_uniqueness_of :twitter_status_id
   validates_presence_of :twitter_user_id, :twitter_status_id, :body
+
+  belongs_to(:user,
+  primary_key: :twitter_user_id,
+  foreign_key: :twitter_user_id,
+  class_name: "User")
 
   def self.fetch_by_twitter_user_id!(twitter_user_id)
     old_ids = Status.where(:twitter_user_id == twitter_user_id)

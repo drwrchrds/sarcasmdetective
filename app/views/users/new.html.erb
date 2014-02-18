@@ -1,0 +1,7 @@
+<h1>What Twitter user would you like to see?</h1>
+
+<%= form_for @user do |f| %>
+  <%= f.text_field :twitter_handle %>
+
+  <%= f.submit "Let's see it!" %>
+<% end %>
