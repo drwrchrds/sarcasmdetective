@@ -1,13 +1,29 @@
+require 'open-uri'
+
 class Status < ActiveRecord::Base
   validates_uniqueness_of :twitter_status_id
   validates_presence_of :twitter_user_id, :twitter_status_id, :body
 
   def self.fetch_by_twitter_user_id!(twitter_user_id)
-    statuses = TwitterSession.get("statuses/user_timeline", {:user_id => twitter_user_id}).map do |status|
+    old_ids = Status.where(:twitter_user_id == twitter_user_id)
+      .pluck(:twitter_status_id)
+
+    statuses = TwitterSession.get("statuses/user_timeline",
+      {:user_id => twitter_user_id}).map do |status|
       Status.parse_json(status)
     end
 
+    statuses.each do |status|
+      status.save! unless old_ids.include?(status.twitter_status_id)
+    end
+  end
 
+  def self.get_by_twitter_user_id(twitter_user_id)
+    if internet_connection?
+      self.fetch_by_twitter_user_id!(twitter_user_id)
+    else
+      Status.where(:twitter_user_id == twitter_user_id)
+    end
   end
 
   def self.parse_json(status)
@@ -18,12 +34,15 @@ class Status < ActiveRecord::Base
     Status.new(params)
   end
 
-  def self.save_maybe
-
-
-  end
-
   def self.post(body)
     TwitterSession.post("statuses/update", { :status => body })
+  end
+
+  def self.internet_connection?
+    begin
+      true if open("http://www.google.com?")
+    rescue
+      false
+    end
   end
 end
