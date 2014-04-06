@@ -1,7 +1,4 @@
 class TwitterSession
-
-  CONSUMER_KEY = "zE4heWH1m6RdpJDkaxZ9Q"
-  CONSUMER_SECRET = "kaonqtLz0K8eGCJMfJFlzHhOEP2qcQVqDe1hAl9t8"
   ACCESS_TOKEN = "access_token.yml"
 
   def self.get(path, query_values)
@@ -22,7 +19,7 @@ class TwitterSession
 
   def self.request_access_token
     consumer = OAuth::Consumer.new(
-      CONSUMER_KEY, CONSUMER_SECRET, :site => "https://twitter.com")
+      ENV["CONSUMER_KEY"], ENV["CONSUMER_SECRET"], :site => "https://twitter.com")
 
     request_token = consumer.get_request_token
     authorize_url = request_token.authorize_url
