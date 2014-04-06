@@ -1,7 +1,15 @@
 <h1>What Twitter user would you like to see?</h1>
+<p><%= link_to "<- All users", users_url %></p>
 
-<%= form_for @user do |f| %>
-  <%= f.text_field :twitter_handle %>
 
-  <%= f.submit "Let's see it!" %>
-<% end %>
+<form action="<%= users_url %>" method="post" class="form">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    <div class="form-group">
+      <label>Handle
+        <input type="text" name="user[twitter_handle]" class="form-control">
+      </label>
+    </div>
+      
+  <button class="btn btn-default">Let's see it!</button>
+</form>
+  

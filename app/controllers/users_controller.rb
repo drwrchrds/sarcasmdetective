@@ -13,7 +13,8 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.get_by_twitter_handle(user_params[:twitter_handle])
+    twitter_handle = user_params[:twitter_handle].delete('@')
+    @user = User.get_by_twitter_handle(twitter_handle)
     redirect_to user_url(@user)
   end
 

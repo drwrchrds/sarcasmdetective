@@ -1,11 +1,26 @@
-<h1>User: @<%= @user.twitter_handle %></h1>
 
-<ul>
-<% @statuses.each do |status| %>
-<li>
-  <p><%= status.body %></p>
-</li>
-<% end %>
-</ul>
+<div class="container">
+  <h1>User: @<%= @user.twitter_handle %></h1>
+  <p><%= link_to "<- All users", users_url %></p>
 
-<p><%= link_to "<- All users", users_url %></p>
+  <ul class="tweets">
+    <% @statuses.each do |status| %>
+      <li class="tweet">
+      
+        <div class="tweet-body">
+          <h3><%= status.body %></h3>
+        </div>
+      
+        <div class="sentiments">
+          <p>Sentiments:</p>
+          <h3><%= status.sentiments.join('  ') %></h3>
+        </div>
+      
+        <div class="sarcasm-level">
+          <p>Sarcasm level:</p>
+          <h2><%= status.sarcasm_level %></h2>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+</div>

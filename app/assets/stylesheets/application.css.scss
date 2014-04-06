@@ -11,3 +11,40 @@
  *= require_self
  *= require_tree .
  */
+@import "bootstrap";
+
+body, html {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: lightblue;
+}
+
+ul {
+  list-style:none;
+}
+
+#homepage {
+  width: 50%;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 20px;
+  > div {
+    padding: 20px;
+  }
+}
+
+#new-handle {
+  background: black;
+  color: white;
+/*  padding: 20px;*/
+  border-radius: 15px;
+}
+
+h1 {
+  font-weight: 800;
+  font-size: 80px;
+}

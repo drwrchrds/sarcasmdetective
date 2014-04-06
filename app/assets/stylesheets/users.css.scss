@@ -1,3 +1,57 @@
 // Place all the styles related to the users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.tweets {
+  list-style: none;
+}
+
+.tweet {
+  border: thin solid darkslategrey;
+  border-radius: 5px;
+  margin: 10px;
+/*  overflow: visible;*/
+  min-height: 110px;
+  background: seashell;
+  position: relative;
+}
+
+.tweet div {
+  display: inline-block;
+  vertical-align: top;
+  height: 100%;
+  margin: 0 -2px;
+  padding: 10px 15px;
+}
+
+.tweet div.tweet-body {
+  
+  background: image-url('bird.png') no-repeat;
+  background-position: top 20px left 10px;
+  background-size: 80px auto;
+  width: 65%;
+  padding-left: 100px;
+  min-height: 100px;
+  h3 {
+    margin-top: 4px;
+    line-height: 1.2;
+    font-size: 21px;
+  }
+}
+
+.sentiments {
+  width: 20%;
+  position: absolute;
+  left: 65%;
+  bottom: 0px;
+  border-left: thin solid grey;
+}
+
+.sarcasm-level {
+  width: 15%;
+  position: absolute;
+  left: 85%;
+  bottom: 0px;
+  border-left: thin solid grey;
+  
+}

@@ -16,19 +16,17 @@ class Status < ActiveRecord::Base
   validates_uniqueness_of :twitter_status_id
   validates_presence_of :twitter_user_id, :twitter_status_id, :body
 
-  attr_reader :body
-
   belongs_to(:user,
-  primary_key: :twitter_user_id,
-  foreign_key: :twitter_user_id,
-  class_name: "User")
+    primary_key: :twitter_user_id,
+    foreign_key: :twitter_user_id,
+    class_name: "User")
 
   def self.fetch_by_twitter_user_id!(twitter_user_id)
     old_ids = Status.where(:twitter_user_id == twitter_user_id)
       .pluck(:twitter_status_id)
 
     statuses = TwitterSession.get("statuses/user_timeline",
-      {:user_id => twitter_user_id}).map do |status|
+      {:user_id => twitter_user_id, :count  => 100}).map do |status|
       Status.parse_json(status)
     end
 
@@ -72,11 +70,11 @@ class Status < ActiveRecord::Base
   end
   
   def sentiments
-    Thought.get_sentiments(body)
+    Thought.sentiments(self.body)
   end
   
-  def sarcastic?
-    Thought.is_sarcastic?(body)
+  def sarcasm_level
+    Thought.sarcasm(self.body)
   end
 
   def self.internet_connection?

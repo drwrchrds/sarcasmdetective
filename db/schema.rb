@@ -11,18 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140218024934) do
+ActiveRecord::Schema.define(version: 20140406194052) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "statuses", force: true do |t|
-    t.string   "body",              limit: 140, null: false
-    t.string   "twitter_status_id",             null: false
-    t.string   "twitter_user_id",               null: false
+    t.string   "body",              null: false
+    t.string   "twitter_status_id", null: false
+    t.string   "twitter_user_id",   null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "statuses", ["twitter_status_id"], name: "index_statuses_on_twitter_status_id", unique: true
-  add_index "statuses", ["twitter_user_id"], name: "index_statuses_on_twitter_user_id"
+  add_index "statuses", ["twitter_status_id"], name: "index_statuses_on_twitter_status_id", unique: true, using: :btree
+  add_index "statuses", ["twitter_user_id"], name: "index_statuses_on_twitter_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "twitter_handle"
@@ -31,7 +34,7 @@ ActiveRecord::Schema.define(version: 20140218024934) do
     t.datetime "updated_at"
   end
 
-  add_index "users", ["twitter_handle"], name: "index_users_on_twitter_handle", unique: true
-  add_index "users", ["twitter_user_id"], name: "index_users_on_twitter_user_id", unique: true
+  add_index "users", ["twitter_handle"], name: "index_users_on_twitter_handle", unique: true, using: :btree
+  add_index "users", ["twitter_user_id"], name: "index_users_on_twitter_user_id", unique: true, using: :btree
 
 end
