@@ -15,7 +15,13 @@ class UsersController < ApplicationController
   def create
     twitter_handle = user_params[:twitter_handle].delete('@')
     @user = User.get_by_twitter_handle(twitter_handle)
-    redirect_to user_url(@user)
+
+    if @user.save
+      redirect_to user_url(@user)
+    else
+      flash[:errors] = @user.errors.full_messages
+      redirect_to users_url
+    end
   end
 
   private

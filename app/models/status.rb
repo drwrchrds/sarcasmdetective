@@ -3,7 +3,7 @@
 # Table name: statuses
 #
 #  id                :integer          not null, primary key
-#  body              :string(140)      not null
+#  body              :string(255)      not null
 #  twitter_status_id :string(255)      not null
 #  twitter_user_id   :string(255)      not null
 #  created_at        :datetime

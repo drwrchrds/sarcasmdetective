@@ -3,7 +3,12 @@
     <h1>SRSLY?</h1>
     <h2>Twitter Sarcasm Detective</h2>
   </div>
-  
+  <% if flash[:errors] %>
+    <div class="alert alert-warning alert-dismissable">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <strong>Warning!</strong> That Twitter user was not found
+    </div>
+  <% end %>
   <div id="new-handle">
     <h2>Find out how sarcastic a Twitter user is:</h2>
     <form action="<%= users_url %>" method="post" class="form">
