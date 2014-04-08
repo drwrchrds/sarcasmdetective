@@ -71,6 +71,7 @@ GEM
     mime-types (1.25.1)
     minitest (4.7.5)
     multi_json (1.8.4)
+    newrelic_rpm (3.7.3.204)
     oauth (0.4.7)
     pg (0.17.1)
     polyglot (0.3.3)
@@ -150,6 +151,7 @@ DEPENDENCIES
   jquery-rails
   json
   launchy
+  newrelic_rpm
   oauth
   pg
   pry-rails
